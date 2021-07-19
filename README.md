@@ -1,3 +1,3 @@
 # Sudoku Solver
 
-Test
+An A.I. Sudoku Solver.

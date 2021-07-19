@@ -1,0 +1,13 @@
+# dependencies
+node_modules/
+
+# production
+/client/build
+
+# misc
+/client/.DS_Store
+.env/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
