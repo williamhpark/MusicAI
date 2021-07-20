@@ -11,7 +11,6 @@ def rescaleImage(img, scale=0.75):
     return cv.resize(img, dimensions, interpolation=cv.INTER_AREA)
 
 
-
 def grayscaleImage(img_Path):
     """Apply grayscale onto image and then rescale"""
     img = cv.imread(str(img_Path), cv.IMREAD_GRAYSCALE)
@@ -47,12 +46,13 @@ def invertImage(img):
     invert = cv.bitwise_not(img, img)
     kernel = np.array([[0., 1., 0.], [1., 1., 1.], [0., 1., 0.]], np.uint8)
     out = cv.dilate(invert, kernel)
-    
+
     # cv.imshow('Inverted and Dilated Image', out)
     # cv.waitKey(0)
     return out
 
-def process(img_Path, blur = None ,threshold = None, inversion = None):
+
+def process(img_Path, blur=None, threshold=None, inversion=None):
     img = grayscaleImage(img_Path)
     if blur is not None:
         processBlur = blur(img)
@@ -61,9 +61,9 @@ def process(img_Path, blur = None ,threshold = None, inversion = None):
     if inversion is not None:
         out = inversion(processThreshold)
     return out
-    
-    
+
+
 """FOR TESTING"""
 
 
-# img = process('Pre-Processing/Photos/sudoku_board.jpg', blurImage, thresholdImage, invertImage) 
+# img = process('machine_learning/preprocessing/Photos/sudoku_board.jpg', blurImage, thresholdImage, invertImage)
