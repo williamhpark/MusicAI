@@ -83,7 +83,7 @@ def extractSquares(cropped_img):
             finalgrid[i][j] = np.array(finalgrid[i][j])
     for i in range(9):
         for j in range(9):
-            cv.imwrite(str("machine_learning/extract_cells/cell_"+str(i)+str(j)+".jpg"),finalgrid[i][j])
+            cv.imwrite(str("machine_learning/preprocessing/extract_cells/cell_"+str(i)+str(j)+".jpg"),finalgrid[i][j])
     
     return finalgrid
 
