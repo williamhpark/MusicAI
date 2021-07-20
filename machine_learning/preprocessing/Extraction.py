@@ -4,7 +4,7 @@ import PreProcessing as pre
 
 
 def findContours(img):
-    """Find the contours of a certain image"""
+    """Find the contours of the board"""
     contours, heirarchy = cv.findContours(img,cv.RETR_EXTERNAL,cv.CHAIN_APPROX_SIMPLE)
     return contours
 
@@ -51,7 +51,7 @@ def cropWarp(img,width,height,corners):
     grid = cv.getPerspectiveTransform(ordered_corners,dimensions)
     return cv.warpPerspective(img,grid,(width,height))
 
-def extractImage(cropped_img):
+def extractSquares(cropped_img):
     # Convert color image to gray again
     # Apparently image is already in gray???
     # grid = cv.cvtColor(cropped_img,cv.COLOR_BGR2GRAY)
@@ -93,6 +93,6 @@ def extractImage(cropped_img):
 # cv.imshow('Cropped Image', cropped_img)
 # cv.waitKey(0)
 
-# grid = extractImage(cropped_img)
+# grid = extractSquares(cropped_img)
 # cv.imshow('Re-thresholding',grid)
 # cv.waitKey(0)
