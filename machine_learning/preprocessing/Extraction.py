@@ -52,13 +52,40 @@ def cropWarp(img,width,height,corners):
     return cv.warpPerspective(img,grid,(width,height))
 
 def extractSquares(cropped_img):
+    """Extract squares and save as JPG"""
     # Convert color image to gray again
     # Apparently image is already in gray???
     # grid = cv.cvtColor(cropped_img,cv.COLOR_BGR2GRAY)
     # Invert and apply gaussian thresholding again before extraction
     grid = cv.bitwise_not(cv.adaptiveThreshold(cropped_img,255,
-                                cv.ADAPTIVE_THRESH_GAUSSIAN_C,cv.THRESH_BINARY,101,1))
-    return grid
+                                cv.ADAPTIVE_THRESH_GAUSSIAN_C,cv.THRESH_BINARY,101,1)) 
+
+
+    # Divide the image equally into 9 parts vertically and horizontally
+    edge_h = np.shape(grid)[0]
+    edge_w = np.shape(grid)[1]
+    celledge_h = edge_h//9
+    celledge_w = edge_w//9
+
+
+    tempgrid = []
+    for i in range(celledge_h,edge_h+1,celledge_h):
+        for j in range(celledge_w,edge_w+1,celledge_w):
+            rows = grid[i-celledge_h:i]
+            tempgrid.append([rows[k][j-celledge_w:j] for k in range(len(rows))])
+
+    finalgrid = []
+    for i in range(0,len(tempgrid)-8,9):
+        finalgrid.append(tempgrid[i:i+9])
+
+    for i in range(9):
+        for j in range(9):
+            finalgrid[i][j] = np.array(finalgrid[i][j])
+    for i in range(9):
+        for j in range(9):
+            cv.imwrite(str("machine_learning/extract_cells/cell_"+str(i)+str(j)+".jpg"),finalgrid[i][j])
+    
+    return finalgrid
 
 
 """FOR TESTING"""
@@ -93,6 +120,5 @@ def extractSquares(cropped_img):
 # cv.imshow('Cropped Image', cropped_img)
 # cv.waitKey(0)
 
+# Extract Squares and save as JPG
 # grid = extractSquares(cropped_img)
-# cv.imshow('Re-thresholding',grid)
-# cv.waitKey(0)
