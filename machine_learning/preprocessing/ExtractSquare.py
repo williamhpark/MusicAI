@@ -2,7 +2,6 @@ import cv2 as cv
 import numpy as np
 import PreProcessing as pre
 
-
 def findContours(img):
     """Find the contours of the board"""
     contours, heirarchy = cv.findContours(img,cv.RETR_EXTERNAL,cv.CHAIN_APPROX_SIMPLE)
