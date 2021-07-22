@@ -14,12 +14,12 @@ def rescaleImage(img, scale=0.75):
 def grayscaleImage(img_Path):
     """Apply grayscale onto image and then rescale"""
     img = cv.imread(str(img_Path), cv.IMREAD_GRAYSCALE)
-    img = rescaleImage(img, scale=0.4)
+    img= rescaleImage(img, scale=.5)
 
     # Show image if wanted
     # cv.imshow('Grayscale Resized Image', img)
     # cv.waitKey(0)
-    return img
+    return img,img.copy()
 
 
 def blurImage(img):
@@ -53,14 +53,14 @@ def invertImage(img):
 
 
 def process(img_Path, blur=None, threshold=None, inversion=None):
-    img = grayscaleImage(img_Path)
+    img,copy = grayscaleImage(img_Path)
     if blur is not None:
-        processBlur = blur(img)
+        processBlur = blur(copy)
     if threshold is not None:
         processThreshold = threshold(processBlur)
     if inversion is not None:
         out = inversion(processThreshold)
-    return out
+    return out, img
 
 
 """FOR TESTING"""
