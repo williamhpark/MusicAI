@@ -21,6 +21,7 @@ def extractCorners(corners):
     """Take out the (x,y) coordinates from the corner list"""
     corners = [(corner[0][0],corner[0][1])for corner in corners]
     top_l,bottom_l,bottom_r,top_r = corners[0],corners[1],corners[2],corners[3]
+    # top_r,top_l,bottom_l,bottom_r= corners[0],corners[1],corners[2],corners[3]
     return top_l,top_r,bottom_r,bottom_l
 
 
@@ -89,7 +90,7 @@ def extractSquares(cropped_img):
 
 """FOR TESTING"""
 # Pre-process Image
-# img,original = pre.process("machine_learning/preprocessing/Photos/sudoku_board.jpg", 
+# img,original = pre.process("machine_learning/preprocessing/Photos/sudoku_board_1.jpg", 
 #                     blur = pre.blurImage, threshold= pre.thresholdImage, inversion = pre.invertImage)
 
 # cv.imshow('Orignal', original)
@@ -102,6 +103,7 @@ def extractSquares(cropped_img):
 # contour_img = np.zeros((img.shape[0],img.shape[1],3))
 # cv.drawContours(contour_img,contours,-1,(0,255,0),1)
 # cv.imshow('Contours',contour_img)
+# cv.waitKey(0)
 
 # corners = findCorners(contours)
 

@@ -7,13 +7,13 @@ import torch.nn.functional as F
 
 # Hyperparameters
 input_size = 28*28
-hidden_size = 32
+hidden_size = 64
 num_classes = 10
 batch_size = 100
 learning_rate1 = 0.5
 learning_rate2 = 0.1
 epochs1 = 5
-epochs2 = 5
+epochs2 = 10
 
 # Setup GPU
 

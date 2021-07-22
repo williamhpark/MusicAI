@@ -11,10 +11,10 @@ from torchvision.datasets import MNIST
 import os
 
 
-dataset = MNIST(root='data/', train=True, transform=transforms.ToTensor())
+dataset = MNIST(root='machine_learning/data/', train=True, transform=transforms.ToTensor())
 
 
-filename = 'Model.pt'
+filename = 'machine_learning/Model.pt'
 
 
 device = sm.get_default_device()
