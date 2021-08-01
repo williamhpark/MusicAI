@@ -11,10 +11,11 @@ def findDigit(img):
     """Find the digit and return a resized numpy array of dimension 28x28"""
     thresh = 128
     dimensions = (28, 28)
-    border = 25
+    border = 10
     gray = cv.threshold(img, thresh, 255, cv.THRESH_BINARY)[1]
-    contours = cv.findContours(gray, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
+    contours = cv.findContours(gray, cv.RETR_LIST, cv.CHAIN_APPROX_SIMPLE)
     contours = contours[0] if len(contours) == 2 else contours[1]
+    contour_img = np.zeros((img.shape[0],img.shape[1],3))
     ROI = None
     for contour in contours:
         x, y, w, h = cv.boundingRect(contour)
@@ -38,22 +39,19 @@ def feedDigit(img):
         xb = (torch.from_numpy(ROI).unsqueeze(0).unsqueeze(0))/255
         yb = load.model(xb)
         _, preds = torch.max(yb, dim=1)
-        # plt.imshow(ROI,cmap='Greys')
-        # plt.suptitle(f'Prediction: {preds[0].item()}')
-        # plt.show()
         return preds[0].item()
     else:
         return None
 
-
 """FOR TESTING"""
-# img = cv.imread('machine_learning/preprocessing/extract_cells/cell_13.jpg',cv.COLOR_BGR2GRAY)
-# print(extractDigit(img))
-# tempgrid = []
+# img = cv.imread('machine_learning/preprocessing/extract_cells/cell_22.jpg',cv.COLOR_BGR2GRAY)
+# print(feedDigit(img))
+
+# tempgrid = [[],[],[],[],[],[],[],[],[]]
 # for i in range(9):
 #     for j in range(9):
 #         img = cv.imread('machine_learning/preprocessing/extract_cells/cell_' +
 #                         str(i)+str(j)+'.jpg', cv.COLOR_BGR2GRAY)
-#         tempgrid.append(feedDigit(img))
+#         tempgrid[i].append(feedDigit(img))
 
 # print(tempgrid)

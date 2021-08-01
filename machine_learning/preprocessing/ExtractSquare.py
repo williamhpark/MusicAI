@@ -87,10 +87,20 @@ def extractSquares(cropped_img):
     
     return finalgrid
 
+def prepImg(processed,original):
+    contours = findContours(processed)
+    corners = findCorners(contours)
+    ordered_corners = extractCorners(corners)
+    width = calcWidth(*ordered_corners)
+    height = calcHeight(*ordered_corners)
+    cropped_img = cropWarp(original,width,height,ordered_corners)
+    return cropped_img
+
+
 
 """FOR TESTING"""
 # Pre-process Image
-# img,original = pre.process("machine_learning/preprocessing/Photos/sudoku_board_1.jpg", 
+# img,original = pre.process("machine_learning/preprocessing/Photos/sudoku_board.jpg", 
 #                     blur = pre.blurImage, threshold= pre.thresholdImage, inversion = pre.invertImage)
 
 # cv.imshow('Orignal', original)
@@ -123,3 +133,7 @@ def extractSquares(cropped_img):
 
 # Extract Squares and save as JPG
 # grid = extractSquares(cropped_img)
+
+# img = cv.imread('machine_learning/preprocessing/extract_cells/cell_01.jpg')
+# cv.imshow('Square',img)
+# cv.waitKey(0)

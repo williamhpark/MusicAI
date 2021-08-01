@@ -27,7 +27,6 @@ model.load_state_dict(torch.load('machine_learning/Model.pt',map_location=device
 #     return preds[0].item()
 
 # img,label = dataset[0]
-# print(img)
 # plt.imshow(img[0],cmap='gray')
 # plt.suptitle(f'Prediction: {displayImage(img,model)}')
 # plt.show()
