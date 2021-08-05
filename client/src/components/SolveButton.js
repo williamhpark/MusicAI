@@ -37,6 +37,7 @@ const SolveButton = () => {
 
     for (let num = 1; num <= 9; num++) {
       if (isSafe(row, col, num)) {
+        dispatch(actions.selectCell(row, col, num));
         dispatch(actions.addEntry(row, col, num));
         dispatch(actions.addChoice(row, col, num));
         solveBoard(board);
@@ -44,6 +45,7 @@ const SolveButton = () => {
     }
 
     if (nextEmptySpot()[0] !== -1) {
+      dispatch(actions.selectCell(row, col, board[row][col].value));
       dispatch(actions.removeEntry(row, col));
       dispatch(actions.removeChoice(row, col, board[row][col].value));
     }

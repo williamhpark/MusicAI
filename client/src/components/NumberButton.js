@@ -22,6 +22,7 @@ const NumberButton = ({ value }) => {
     if (selectedCell && value !== selectedCell.value) {
       dispatch(actions.removeEntry(selectedCell.row, selectedCell.column));
       dispatch(actions.removeChoice(selectedCell.row, selectedCell.column, selectedCell.value));
+      dispatch(actions.selectCell(selectedCell.row, selectedCell.column, null));
       if (value !== null) {
         dispatch(actions.addEntry(selectedCell.row, selectedCell.column, value));
         dispatch(actions.addChoice(selectedCell.row, selectedCell.column, value));

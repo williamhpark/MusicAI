@@ -78,7 +78,7 @@ const choicesReducer = (state = INITIAL_STATE, action) => {
         squares: state.squares.map((square, i) => {
           if (
             i ===
-            Math.floor(action.payload.column / 3) * 3 + Math.floor(action.payload.column / 3)
+            Math.floor(action.payload.row / 3) * 3 + Math.floor(action.payload.column / 3)
           ) {
             return square.map((value, j) => {
               if (j === action.payload.value && value > 0) {
