@@ -2,7 +2,6 @@ import cv2 as cv
 import numpy as np
 import PreProcessing as pre
 
-
 def findContours(img):
     """Find the contours of the board"""
     contours, heirarchy = cv.findContours(img,cv.RETR_EXTERNAL,cv.CHAIN_APPROX_SIMPLE)
@@ -22,6 +21,7 @@ def extractCorners(corners):
     """Take out the (x,y) coordinates from the corner list"""
     corners = [(corner[0][0],corner[0][1])for corner in corners]
     top_l,bottom_l,bottom_r,top_r = corners[0],corners[1],corners[2],corners[3]
+    # top_r,top_l,bottom_l,bottom_r= corners[0],corners[1],corners[2],corners[3]
     return top_l,top_r,bottom_r,bottom_l
 
 
@@ -87,6 +87,16 @@ def extractSquares(cropped_img):
     
     return finalgrid
 
+def prepImg(processed,original):
+    contours = findContours(processed)
+    corners = findCorners(contours)
+    ordered_corners = extractCorners(corners)
+    width = calcWidth(*ordered_corners)
+    height = calcHeight(*ordered_corners)
+    cropped_img = cropWarp(original,width,height,ordered_corners)
+    return cropped_img
+
+
 
 """FOR TESTING"""
 # Pre-process Image
@@ -103,6 +113,7 @@ def extractSquares(cropped_img):
 # contour_img = np.zeros((img.shape[0],img.shape[1],3))
 # cv.drawContours(contour_img,contours,-1,(0,255,0),1)
 # cv.imshow('Contours',contour_img)
+# cv.waitKey(0)
 
 # corners = findCorners(contours)
 
@@ -122,3 +133,7 @@ def extractSquares(cropped_img):
 
 # Extract Squares and save as JPG
 # grid = extractSquares(cropped_img)
+
+# img = cv.imread('machine_learning/preprocessing/extract_cells/cell_01.jpg')
+# cv.imshow('Square',img)
+# cv.waitKey(0)
