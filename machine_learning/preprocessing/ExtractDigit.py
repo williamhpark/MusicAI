@@ -3,7 +3,10 @@ import numpy as np
 import torch
 import cv2 as cv
 import sys
-sys.path.append("./machine_learning")
+import os
+currentdir = os.path.dirname(os.path.realpath(__file__))
+parentdir = os.path.dirname(currentdir)
+sys.path.append(parentdir)
 import LoadModel as load
 
 
@@ -15,7 +18,6 @@ def findDigit(img):
     gray = cv.threshold(img, thresh, 255, cv.THRESH_BINARY)[1]
     contours = cv.findContours(gray, cv.RETR_LIST, cv.CHAIN_APPROX_SIMPLE)
     contours = contours[0] if len(contours) == 2 else contours[1]
-    contour_img = np.zeros((img.shape[0],img.shape[1],3))
     ROI = None
     for contour in contours:
         x, y, w, h = cv.boundingRect(contour)

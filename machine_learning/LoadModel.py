@@ -6,12 +6,14 @@ from torchvision.datasets import MNIST
 import torchvision.transforms as transforms
 import numpy as np
 import matplotlib.pyplot as plt
+import os
+model_path = os.path.dirname(os.path.realpath(__file__))
 
 # Load Model
 
 device = sm.get_default_device()
 model = sm.MnistModel(sm.input_size, sm.hidden_size, sm.num_classes)
-model.load_state_dict(torch.load('machine_learning/Model.pt',map_location=device))
+model.load_state_dict(torch.load(model_path+'\Model.pt',map_location=device))
 # Remove map_location above and uncomment below for GPU loading
 # model.to(device)
 

@@ -1,5 +1,7 @@
 import cv2 as cv
 import numpy as np
+import os
+currentdir = os.path.dirname(os.path.realpath(__file__))
 
 
 def rescaleImage(img, scale=0.75):
@@ -13,8 +15,8 @@ def rescaleImage(img, scale=0.75):
 
 def grayscaleImage(img_Path):
     """Apply grayscale onto image and then rescale"""
-    img = cv.imread(str(img_Path), cv.IMREAD_GRAYSCALE)
-    img= rescaleImage(img, scale=.5)
+    img = cv.imread(img_Path, cv.IMREAD_GRAYSCALE)
+    img= rescaleImage(img, scale=1.0)
 
     # Show image if wanted
     # cv.imshow('Grayscale Resized Image', img)
@@ -66,4 +68,7 @@ def process(img_Path, blur=None, threshold=None, inversion=None):
 """FOR TESTING"""
 
 
-# img = process('machine_learning/preprocessing/Photos/sudoku_board.jpg', blurImage, thresholdImage, invertImage)
+# img = process(currentdir +'/Photos/sudoku_board.jpg', blurImage, thresholdImage, invertImage)
+
+# cv.imshow('window',img[0])
+# cv.waitKey(0)
