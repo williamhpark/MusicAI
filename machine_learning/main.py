@@ -2,9 +2,9 @@ import numpy as np
 import cv2 as cv
 import os
 currentdir = os.path.dirname(os.path.realpath(__file__))
-from preprocessing import PreProcessing as pre
-from preprocessing import ExtractDigit as exDig
-from preprocessing import ExtractSquare as exSq
+from preprocessing import preprocessing as pre
+from preprocessing import extractDigit as exDig
+from preprocessing import extractSquare as exSq
 
 def main(img_Path):
     processedImg, originalImg = pre.process(img_Path,pre.blurImage,pre.thresholdImage,pre.invertImage)

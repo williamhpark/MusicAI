@@ -1,7 +1,7 @@
 import torch
 from torch.utils import data
 import torchvision
-import SetupModel as sm
+import setupModel as sm
 from torchvision.datasets import MNIST
 import torchvision.transforms as transforms
 import numpy as np

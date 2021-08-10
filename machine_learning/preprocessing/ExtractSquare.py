@@ -1,6 +1,6 @@
 import cv2 as cv
 import numpy as np
-from . import PreProcessing as pre
+from . import preprocessing as pre
 import os
 currentdir = os.path.dirname(os.path.realpath(__file__))
 
