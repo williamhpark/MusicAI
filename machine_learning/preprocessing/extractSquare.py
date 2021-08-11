@@ -1,10 +1,12 @@
 import cv2 as cv
 import numpy as np
-import PreProcessing as pre
+from . import preprocessing as pre
+import os
+currentdir = os.path.dirname(os.path.realpath(__file__))
 
 def findContours(img):
     """Find the contours of the board"""
-    contours, heirarchy = cv.findContours(img,cv.RETR_EXTERNAL,cv.CHAIN_APPROX_SIMPLE)
+    contours, _ = cv.findContours(img,cv.RETR_EXTERNAL,cv.CHAIN_APPROX_SIMPLE)
     return contours
 
 
@@ -83,7 +85,7 @@ def extractSquares(cropped_img):
             finalgrid[i][j] = np.array(finalgrid[i][j])
     for i in range(9):
         for j in range(9):
-            cv.imwrite(str("machine_learning/preprocessing/extract_cells/cell_"+str(i)+str(j)+".jpg"),finalgrid[i][j])
+            cv.imwrite(str(currentdir+"\\extract_cells\\cell_"+str(i)+str(j)+".jpg"),finalgrid[i][j])
     
     return finalgrid
 
@@ -100,8 +102,9 @@ def prepImg(processed,original):
 
 """FOR TESTING"""
 # Pre-process Image
-# img,original = pre.process("machine_learning/preprocessing/Photos/sudoku_board.jpg", 
+# img,original = pre.process(currentdir+'/Photos/sudoku_board.jpg', 
 #                     blur = pre.blurImage, threshold= pre.thresholdImage, inversion = pre.invertImage)
+
 
 # cv.imshow('Orignal', original)
 # cv.imshow('Processed Image', img)
@@ -123,7 +126,7 @@ def prepImg(processed,original):
 # cv.imshow('Corners',corner_img)
 # cv.waitKey(0)
 
-# Crop and warp Image
+# # Crop and warp Image
 # ordered_corners = extractCorners(corners)
 # width = calcWidth(*ordered_corners)
 # height = calcHeight(*ordered_corners)
@@ -131,7 +134,7 @@ def prepImg(processed,original):
 # cv.imshow('Cropped Image', cropped_img)
 # cv.waitKey(0)
 
-# Extract Squares and save as JPG
+# # Extract Squares and save as JPG
 # grid = extractSquares(cropped_img)
 
 # img = cv.imread('machine_learning/preprocessing/extract_cells/cell_01.jpg')

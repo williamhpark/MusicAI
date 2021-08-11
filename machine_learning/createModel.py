@@ -1,4 +1,4 @@
-import SetupModel as sm
+import setupModel as sm
 import numpy as np
 import torch
 import torch.nn as nn
