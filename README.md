@@ -4,7 +4,7 @@ An application that converts any image of a standard 9X9 Sudoku board from Googl
 
 The machine learning model to recognize the digits within the images fed to it was developed using PyTorch and trained using the MNIST dataset, and the borders of the board were differentiated during the extraction of the cells using OpenCV.
 
-The "Solve" fucntionality (for when the user wants the board to solve itself) was implemented using a backtracking algorithm. Here's the relevant code snippet:
+The "Solve" functionality (for when the user wants the board to solve itself) was implemented using a backtracking algorithm. Here's the relevant code snippet:
 
 ```
 const board = useSelector((state) => state.board); // A 2-D array representing the Sudoku board
